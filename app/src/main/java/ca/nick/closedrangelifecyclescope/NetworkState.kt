@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.util.Log
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 
@@ -16,6 +17,7 @@ class NetworkState(private val context: Context) {
     fun changes() = callbackFlow<Boolean> {
         val broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
+                Log.v("asdf", "Broadcast received")
                 offer(isConnected())
             }
         }
