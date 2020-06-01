@@ -3,8 +3,6 @@ package ca.nick.closedrangelifecyclescope
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.coroutineScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,13 +16,13 @@ class MainActivity : AppCompatActivity() {
          * Uncomment the code below to see the BroadcastReceiver in NetworkState.kt continue to fire
          * even when this Activity has stopped.
          */
-//        lifecycle.coroutineScope.launchWhenStarted {
+//        lifecycleScope.launchWhenStarted {
 //            networkState.changes()
 //                .onEach { isConnected -> updateUi(isConnected) }
 //                .launchIn(this)
 //        }
 
-        lifecycle.restartingLaunch {
+        lifecycle.launchRestartable {
             networkState.changes()
                 .onEach { isConnected -> updateUi(isConnected) }
                 .launchIn(this)
